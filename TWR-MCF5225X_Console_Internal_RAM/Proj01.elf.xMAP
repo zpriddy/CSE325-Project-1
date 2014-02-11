@@ -1,0 +1,94 @@
+
+
+#>00000400          ___heap_size (linker command file)
+#>00000800          ___stack_size (linker command file)
+#>40000000          ___IPSBAR (linker command file)
+#>20000000          ___RAMBAR (linker command file)
+#>00010000          ___RAMBAR_SIZE (linker command file)
+#>00000000          ___FLASHBAR (linker command file)
+#>00080000          ___FLASHBAR_SIZE (linker command file)
+#>2000FFFC          ___SP_AFTER_RESET (linker command file)
+
+# .userram
+
+# .code
+
+# .vectorram
+
+# .vectors
+  20000500 00000400 .vectortable _vect	(exceptions_c.obj)
+
+# .text
+  20000900 00000008 .text   __initialize_system	(startcf_c.obj)
+  20000908 00000008 .text   __call_static_initializers	(startcf_c.obj)
+  20000910 0000006C .text   __copy_rom_section	(startcf_c.obj)
+  2000097C 0000005C .text   __copy_rom_sections_to_ram	(startcf_c.obj)
+  200009D8 0000022A .text   clear_mem	(startcf_c.obj)
+  20000C02 00000096 .text   _startup	(startcf_c.obj)
+  20000C98 00000042 .text   busy_delay	(main_c.obj)
+  20000CDA 00000BEC .text   main	(main_c.obj)
+  200018C6 00000004 .text   TrapHandler_printf	(exceptions_c.obj)
+  200018CA 00000200 .text   mcf_exception_handler	(exceptions_c.obj)
+  20001ACA 00000020 .text   asm_exception_handler	(exceptions_c.obj)
+  20001AEA 00000008 .text   mcf5xxx_wr_vbr	(exceptions_c.obj)
+  20001AF2 00000062 .text   initialize_exceptions	(exceptions_c.obj)
+  20001B54 00000020 .text   pll_init	(TWR-MCF5225X_sysinit_c.obj)
+  20001B74 00000022 .text   scm_init	(TWR-MCF5225X_sysinit_c.obj)
+  20001B96 0000003E .text   __initialize_hardware	(TWR-MCF5225X_sysinit_c.obj)
+#>20001BD4          ___ROM_AT (linker command file)
+#>20001BD4          ___DATA_ROM (linker command file)
+
+# .data
+#>20005000          ___DATA_RAM (linker command file)
+#>20005000          __exception_table_start__ (linker command file)
+# Exception index
+  20005000 00000000         Exception Table Index	()
+#>20005000          __exception_table_end__ (linker command file)
+#>20005000          ___sinit__ (linker command file)
+# Linker generated symbols
+  20005000 00000004         static initializer	(linker generated)
+#>20005004          __START_DATA (linker command file)
+#>20005004          __END_DATA (linker command file)
+#>20005004          __START_SDATA (linker command file)
+#>20005004          __END_SDATA (linker command file)
+#>20005004          ___DATA_END (linker command file)
+#>20005004          __SDA_BASE (linker command file)
+
+# .bss
+#>20005004          ___BSS_START (linker command file)
+#>20005004          __START_SBSS (linker command file)
+#>20005004          __END_SBSS (linker command file)
+#>20005004          __START_BSS (linker command file)
+#>20005004          __END_BSS (linker command file)
+#>20005004          ___BSS_END (linker command file)
+
+# .custom
+#>20005004          ___HEAP_START (linker command file)
+#>20005004          ___heap_addr (linker command file)
+#>20005404          ___HEAP_END (linker command file)
+#>20005404          ___SP_END (linker command file)
+#>20005C04          ___SP_INIT (linker command file)
+#>20000000          ___VECTOR_RAM (linker command file)
+#>20005C04          __SP_INIT (linker command file)
+#>20005404          ___mem_limit (linker command file)
+#>00000010          ___stack_safety (linker command file)
+#>20001BD8          _romp_at (linker command file)
+
+# .romp
+#>20001BD8          __S_romp (linker command file)
+
+
+# Memory map:
+  v_addr   p_addr   size     name
+  20000000 20000000 00000000 .vectorram vectorram
+  20000500 20000500 00000000 .code      code
+  20000500 20000500 00000400 .vectors   code
+  20000900 20000900 000012D4 .text      code
+  20005000 20005000 00000000 .userram   userram
+  20005000 20001BD4 00000004 .data      userram
+  20005004 20005004 00000000 .bss       userram
+  20005004 20005004 00000000 .custom    userram
+  20005004 20001BD8 00000018 .romp      userram
+
+# Link start time: Fri Sep 06 20:02:07 2013
+# Link end time: Fri Sep 06 20:02:08 2013
